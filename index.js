@@ -16,10 +16,11 @@ var api = new ParseServer({
     cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
     appId: process.env.APP_ID || 'myAppId',
     masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+    clientKey: "",
     serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
     verbose: true,
     liveQuery: {
-        classNames: ["LiveQueryTestObject", "Message"] // List of classes to support for query subscriptions
+        classNames: ["LiveQueryTestObject", "Message", "Request"] // List of classes to support for query subscriptions
     }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
@@ -58,3 +59,6 @@ httpServer.listen(port, function() {
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer, {logLevel: 'VERBOSE'});
+
+// var query = new Parse.Query("Message");
+// var subscription = query.subscribe();
